@@ -13,22 +13,22 @@
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
 
-minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dirt" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 # Site Settings
-locale                   : "en-US"
+locale                   : "ko-KR"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-title                    : "Site Title"
-title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Your Name"
-description              : "An amazing website."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+title                    : "게임 개발자의 성장 노트"
+title_separator          : "|"
+subtitle                 : "배우고, 만들고, 성장하는 개발 이야기"
+name                     : "Aes"
+description              : "게임 개발을 공부하며 배우는 것들을 기록하는 공간."
+url                      : "https://eunseok.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : "/assets/images/slime.png" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-breadcrumbs              : # true, false (default)
+breadcrumbs              : true #, false (default)
 words_per_minute         : 200
 enable_copy_code_button  : # true, false (default)
 copyright                : # "copyright" name, defaults to site.title
@@ -113,52 +113,53 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
-  email            :
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
+  name             : "Aes"
+  avatar           : "/assets/images/bio.png"
+  bio              : "레벨업하는 중"
+  location         : "South Korea"
+  email            : "asp6742@gmail.com"
+
+links:
+  - label: "Email"
+    icon: "fas fa-fw fa-envelope-square"
+    url: "asp6742@gmail.com"
+  - label: "Website"
+    icon: "fas fa-fw fa-link"
+    url: "https://eunseok.github.io"
+  #- label: "Twitter"
+  #  icon: "fab fa-fw fa-twitter-square"
+  #  url: "https://twitter.com/"
+  #- label: "Facebook"
+  #  icon: "fab fa-fw fa-facebook-square"
+  #  url: "https://facebook.com/"
+  - label: "GitHub"
+    icon: "fab fa-fw fa-github"
+    url: "https://github.com/Eunseok"
+  #- label: "Instagram"
+  #  icon: "fab fa-fw fa-instagram"
+  #  url: "https://instagram.com/"
 
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url:
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url:
+    #- label: "Twitter"
+    #  icon: "fab fa-fw fa-twitter-square"
+    #  url:
+    #- label: "Facebook"
+    #  icon: "fab fa-fw fa-facebook-square"
+    #  url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      # url:
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      # url:
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url:
+      url: "https://github.com/Eunseok"
+    #- label: "GitLab"
+    #  icon: "fab fa-fw fa-gitlab"
+    #  url:
+    #- label: "Bitbucket"
+    #  icon: "fab fa-fw fa-bitbucket"
+    #  url:
+    #- label: "Instagram"
+    #  icon: "fab fa-fw fa-instagram"
+    #  url:
 
 
 # Reading Files
@@ -323,3 +324,6 @@ defaults:
       comments: # true
       share: true
       related: true
+      show_date: true
+    
+date_format: "%Y-%m-%d"
