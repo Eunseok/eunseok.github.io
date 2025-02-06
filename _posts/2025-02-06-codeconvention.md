@@ -165,5 +165,3 @@ if (condition && anotherCondition)
 ```
 
 
-
-✅ **모든 팀원이 같은 규칙을 따를 수 있도록 적극적으로 활용해주세요!** 🚀
