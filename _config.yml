@@ -325,5 +325,6 @@ defaults:
       share: true
       related: true
       show_date: true
+      classes: wide
 
 date_format: "%Y-%m-%d"
