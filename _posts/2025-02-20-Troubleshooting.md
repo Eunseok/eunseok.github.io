@@ -4,7 +4,6 @@ title: "유니티 입문(개인)_트러블슈팅"
 categories: [트러블슈팅]
 tags: [C#, Troubleshooting]
 typora-root-url: ../
-
 ---
 
 > 요구하신 트러블슈팅과는 다를 수 있지만, 이번 과제를 진행하면서 부딪쳤던 문제와 해결 과정을 정리하려 합니다.
