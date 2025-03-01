@@ -238,6 +238,7 @@ void OnSceneLoaded()
 ~~~html
 <details>
 <summary>접기/펼치기</summary>
+  
  ```csharp
      public class SceneLoader : MonoBehaviour
     {
@@ -330,6 +331,7 @@ void OnSceneLoaded()
         }
     }
  ```
+                                              
 </details>
 ~~~
 
