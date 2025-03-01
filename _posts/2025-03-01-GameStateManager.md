@@ -23,7 +23,7 @@ typora-root-url: ../
 
 #### 1. **`GameState` 열거형**
 
-```
+```csharp
 public enum GameState
 {
     MainMenu,
@@ -46,7 +46,7 @@ public enum GameState
 
 #### 2. **싱글톤 패턴**
 
-```
+```csharp
 public static GameStateManager Instance; // 싱글톤 패턴
 ```
 
@@ -55,7 +55,7 @@ public static GameStateManager Instance; // 싱글톤 패턴
 
 #### **Awake 메서드에서 싱글톤 구현**
 
-```
+```csharp
 private void Awake()
 {
     if (Instance == null)
@@ -79,7 +79,7 @@ private void Awake()
 
 #### 3. **현재 게임 상태 관리**
 
-```
+```csharp
 private GameState currentState; // 현재 상태
 ```
 
@@ -90,7 +90,7 @@ private GameState currentState; // 현재 상태
 
 #### 4. **상태 변경 이벤트**
 
-```
+```csharp
 public event Action<GameState> OnGameStateChanged;
 ```
 
@@ -107,7 +107,7 @@ public event Action<GameState> OnGameStateChanged;
 
 #### 5. **SetGameState 메서드**
 
-```
+```csharp
 public void SetGameState(GameState newState)
 {
     if (currentState != newState)
@@ -136,7 +136,7 @@ public void SetGameState(GameState newState)
 
 #### 6. **GetGameState 메서드**
 
-```
+```csharp
 public GameState GetGameState()
 {
     return currentState;
@@ -162,7 +162,7 @@ public GameState GetGameState()
    - 외부에서 `OnGameStateChanged`에 동적으로 구독을 추가하여 상태 변화에 따라 특정 작업 수행 가능.
    - 예:
 
-```
+```csharp
 GameStateManager.Instance.OnGameStateChanged += HandleGameStateChange;
 ```
 
