@@ -233,107 +233,13 @@ void OnSceneLoaded()
 
 
 
-
-
-~~~html
 <details>
-<summary>접기/펼치기</summary>
-  
- ```csharp
-     public class SceneLoader : MonoBehaviour
-    {
-        public static SceneLoader Instance;
+  <summary>코드 스니펫</summary>
+```
+테스트
+```
 
-        [SerializeField] private CanvasGroup fadeCanvasGroup;
-        [SerializeField] private float fadeDuration = 1f;
-        [SerializeField] private GameObject loadingScreen;
-        [SerializeField] private Slider progressBar;
-        [SerializeField] private TextMeshProUGUI progressText; // 퍼센트 텍스트
-
-
-        // 씬 로드 완료 콜백
-        private Action onSceneLoadedCallback;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        public void LoadScene(string sceneName, Action onSceneLoaded = null)
-        {
-            onSceneLoadedCallback = onSceneLoaded;
-            StartCoroutine(LoadSceneAsync(sceneName));
-        }
-
-        public void LoadScene(int buildIndex, Action onSceneLoaded = null)
-        {
-            onSceneLoadedCallback = onSceneLoaded;
-            StartCoroutine(LoadSceneAsync(SceneManager.GetSceneByBuildIndex(buildIndex).name));
-        }
-
-        private IEnumerator LoadSceneAsync(string sceneName)
-        {
-            loadingScreen.SetActive(true);
-            yield return StartCoroutine(Fade(1f));
-
-            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-            if (operation != null)
-            {
-                operation.allowSceneActivation = false;
-
-                while (!operation.isDone)
-                {
-                    // 로딩 진행도 계산 및 슬라이더 값 업데이트
-                    float progress = Mathf.Clamp01(operation.progress / 0.9f);
-                    progressBar.value = progress;
-
-                    // 로딩 진행도를 퍼센트로 표시
-                    progressText.text = $"{Mathf.RoundToInt(progress * 100)}%";
-
-                    if (operation.progress >= 0.9f)
-                    {
-                        operation.allowSceneActivation = true; //여기서 operation.isDone: true가 된다
-                    }
-
-                    yield return null;
-                }
-            }
-
-            yield return StartCoroutine(Fade(0f));
-            loadingScreen.SetActive(false);
-
-            // 로드 완료 콜백 실행
-            onSceneLoadedCallback?.Invoke();
-        }
-
-
-        private IEnumerator Fade(float targetAlpha)
-        {
-            float startAlpha = fadeCanvasGroup.alpha;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < fadeDuration)
-            {
-                elapsedTime += Time.deltaTime;
-                fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
-                yield return null;
-            }
-
-            fadeCanvasGroup.alpha = targetAlpha;
-        }
-    }
- ```
-                                              
 </details>
-~~~
 
 
 
