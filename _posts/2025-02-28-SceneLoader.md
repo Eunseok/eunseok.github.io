@@ -4,6 +4,7 @@ title: "SceneLoader"
 categories: [Framework]
 tags: [C#, Framework]
 typora-root-url: ../
+
 ---
 
 ### 개요
@@ -21,14 +22,14 @@ typora-root-url: ../
 
 #### 1. **변수**
 
-```
+```csharp
 public static SceneLoader Instance;
 ```
 
 - 싱글톤 패턴 구현을 위한 정적 변수.
 - `SceneLoader`가 프로젝트 전반에서 전역적으로 사용될 수 있도록 보장.
 
-```
+```csharp
 [SerializeField] private CanvasGroup fadeCanvasGroup;
 [SerializeField] private float fadeDuration = 1f;
 [SerializeField] private GameObject loadingScreen;
@@ -42,7 +43,7 @@ public static SceneLoader Instance;
 - **`progressBar`**: 씬 로딩 진행률을 시각적으로 나타내는 슬라이더.
 - **`progressText`**: 텍스트로 로딩 진행률을 퍼센트(% 형식)로 표시.
 
-```
+```csharp
 private Action onSceneLoadedCallback;
 ```
 
@@ -53,7 +54,7 @@ private Action onSceneLoadedCallback;
 
 #### 2. **Awake 메서드**
 
-```
+```csharp
 private void Awake()
 {
     if (Instance == null)
@@ -87,7 +88,7 @@ private void Awake()
 
 ##### **`LoadScene(string sceneName, Action onSceneLoaded = null)`**
 
-```
+```csharp
 public void LoadScene(string sceneName, Action onSceneLoaded = null)
 {
     onSceneLoadedCallback = onSceneLoaded;
@@ -101,7 +102,7 @@ public void LoadScene(string sceneName, Action onSceneLoaded = null)
 
 ##### **`LoadScene(int buildIndex, Action onSceneLoaded = null)`**
 
-```
+```csharp
 public void LoadScene(int buildIndex, Action onSceneLoaded = null)
 {
     onSceneLoadedCallback = onSceneLoaded;
@@ -116,7 +117,7 @@ public void LoadScene(int buildIndex, Action onSceneLoaded = null)
 
 #### 4. **LoadSceneAsync 메서드 (비동기 씬 전환)**
 
-```
+```csharp
 private IEnumerator LoadSceneAsync(string sceneName)
 ```
 
@@ -127,13 +128,13 @@ private IEnumerator LoadSceneAsync(string sceneName)
    - `StartCoroutine(Fade(1f));`: 화면 페이드 아웃(알파 = 1).
 2. **비동기 씬 로드**:
 
-```
+```csharp
 AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 ```
 
 1. **로딩 진행률 계산 및 표시**:
 
-```
+```csharp
 float progress = Mathf.Clamp01(operation.progress / 0.9f);
 progressBar.value = progress;
 progressText.text = $"{Mathf.RoundToInt(progress * 100)}%";
@@ -145,7 +146,7 @@ progressText.text = $"{Mathf.RoundToInt(progress * 100)}%";
 
 1. **씬 활성화**:
 
-```
+```csharp
 if (operation.progress >= 0.9f)
 {
     operation.allowSceneActivation = true;
@@ -156,7 +157,7 @@ if (operation.progress >= 0.9f)
 
 1. **페이드 인 및 로드 완료**:
 
-```
+```csharp
 yield return StartCoroutine(Fade(0f));
 loadingScreen.SetActive(false);
 onSceneLoadedCallback?.Invoke();
@@ -169,7 +170,7 @@ onSceneLoadedCallback?.Invoke();
 
 #### 5. **Fade 메서드 (페이드 효과)**
 
-```
+```csharp
 private IEnumerator Fade(float targetAlpha)
 ```
 
@@ -177,7 +178,7 @@ UI 화면의 **투명도(알파)**를 부드럽게 전환시키는 메서드.
 
 1. 초기 알파 값 설정:
 
-```
+```csharp
 float startAlpha = fadeCanvasGroup.alpha;
 ```
 
@@ -185,7 +186,7 @@ float startAlpha = fadeCanvasGroup.alpha;
 
 1. 시간 기반 전환:
 
-```
+```csharp
 fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
 ```
 
@@ -207,19 +208,19 @@ fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDu
 
 1. 전역 접근:
 
-```
+```csharp
 SceneLoader.Instance.LoadScene("SceneName", OnSceneLoaded);
 ```
 
 또는
 
-```
+```csharp
 SceneLoader.Instance.LoadScene(1, OnSceneLoaded);
 ```
 
 1. 로드 완료 콜백:
 
-```
+```csharp
 void OnSceneLoaded()
 {
     Debug.Log("씬 로드 완료!");
@@ -227,3 +228,110 @@ void OnSceneLoaded()
 ```
 
 이와 같이, 이 클래스는 플레이어의 게임 플레이 경험을 향상시킬 수 있는 완성도 높은 씬 관리 유틸리티입니다. 🚀
+
+
+
+
+
+
+
+~~~html
+<details>
+<summary>접기/펼치기</summary>
+ ```csharp
+     public class SceneLoader : MonoBehaviour
+    {
+        public static SceneLoader Instance;
+
+        [SerializeField] private CanvasGroup fadeCanvasGroup;
+        [SerializeField] private float fadeDuration = 1f;
+        [SerializeField] private GameObject loadingScreen;
+        [SerializeField] private Slider progressBar;
+        [SerializeField] private TextMeshProUGUI progressText; // 퍼센트 텍스트
+
+
+        // 씬 로드 완료 콜백
+        private Action onSceneLoadedCallback;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void LoadScene(string sceneName, Action onSceneLoaded = null)
+        {
+            onSceneLoadedCallback = onSceneLoaded;
+            StartCoroutine(LoadSceneAsync(sceneName));
+        }
+
+        public void LoadScene(int buildIndex, Action onSceneLoaded = null)
+        {
+            onSceneLoadedCallback = onSceneLoaded;
+            StartCoroutine(LoadSceneAsync(SceneManager.GetSceneByBuildIndex(buildIndex).name));
+        }
+
+        private IEnumerator LoadSceneAsync(string sceneName)
+        {
+            loadingScreen.SetActive(true);
+            yield return StartCoroutine(Fade(1f));
+
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+            if (operation != null)
+            {
+                operation.allowSceneActivation = false;
+
+                while (!operation.isDone)
+                {
+                    // 로딩 진행도 계산 및 슬라이더 값 업데이트
+                    float progress = Mathf.Clamp01(operation.progress / 0.9f);
+                    progressBar.value = progress;
+
+                    // 로딩 진행도를 퍼센트로 표시
+                    progressText.text = $"{Mathf.RoundToInt(progress * 100)}%";
+
+                    if (operation.progress >= 0.9f)
+                    {
+                        operation.allowSceneActivation = true; //여기서 operation.isDone: true가 된다
+                    }
+
+                    yield return null;
+                }
+            }
+
+            yield return StartCoroutine(Fade(0f));
+            loadingScreen.SetActive(false);
+
+            // 로드 완료 콜백 실행
+            onSceneLoadedCallback?.Invoke();
+        }
+
+
+        private IEnumerator Fade(float targetAlpha)
+        {
+            float startAlpha = fadeCanvasGroup.alpha;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+                yield return null;
+            }
+
+            fadeCanvasGroup.alpha = targetAlpha;
+        }
+    }
+ ```
+</details>
+~~~
+
+
+
