@@ -69,7 +69,7 @@ typora-root-url: ../
 
 ### UI 관리 관련 메서드
 
-- ```
+- ```csharp
   SetCanvas(GameObject go, bool sort = true)
   ```
 
@@ -81,13 +81,13 @@ typora-root-url: ../
 
 ### HUD 표시
 
-```
+```csharp
 UIManager.Instance.ShowHud<MyHUD>();
 ```
 
 ### Popup 표시 및 닫기
 
-```
+```csharp
 // Popup 표시
 var popup = UIManager.Instance.ShowPopup<MyPopup>();
 
