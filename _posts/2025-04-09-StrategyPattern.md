@@ -6,9 +6,7 @@ tags: [C#, StrategyPattern, GoF]
 typora-root-url: ../
 ---
 
-## 스킬 전략 다이어그램
-
-![image-20250406003539652](/Images/2025-04-09-StrategyPattern//image-20250406003539652.png)
+## 스킬 전략 다이어그램 ![image-20250406003539652](/Images/2025-04-09-StrategyPattern//image-20250406003539652.png)
 
 - Hero는 **전략 인터페이스만** 알고 있음 → 느슨한 결합(Decoupling)
 - 각 전략은 **ScriptableObject**로 구현
